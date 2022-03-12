@@ -7,31 +7,24 @@
 </head>
 <body>
 <?php
+require_once("classes/Model.php");
+require_once("classes/Voiture.php");
+require_once("classes/Utilisateur.php");
+require_once("classes/Trajet.php");
 
-require_once("Conf.php");
-require_once("Voiture.php");
-
-$host = Conf ::get("host");
-$dbname = Conf ::get("dbname");
-$user = Conf ::get("user");
-$password = Conf ::get("password");
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
-} catch(PDOException $e) {
-    die($e -> getMessage());
-}
-
-$query = $pdo -> query("SELECT * FROM Voiture");
-$array = $query -> fetchAll(PDO::FETCH_OBJ);
-
-foreach($array as $key => $value) {
-    Voiture ::$cars[] = new Voiture($value -> immatriculation, $value -> marque, $value -> couleur);
-}
-
-foreach(Voiture::$cars as $key => $value) {
+/*foreach(Voiture::getAllVoitures() as $key => $value) {
     $value -> display();
 }
+
+foreach(Utilisateur::getAllUtilisateurs() as $key => $value) {
+    $value -> display();
+}
+
+foreach(Trajet::getAllTrajets() as $key => $value) {
+    $value -> display();
+}*/
+
+$key = Voiture::getVoitureByImma("AA000AA");
 
 ?>
 </body>
