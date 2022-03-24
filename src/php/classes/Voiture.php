@@ -18,25 +18,34 @@ class Voiture {
         return "<p>" . get_class($this) . " = [</p><p class='tab'>imma = " . $this -> imma . ",</p><p class='tab'>brand = " . ($this -> brand ?: "<em>null</em>") . ",</p><p class='tab'>color = " . ($this -> color ?: "<em>null</em>") . "</p><p>]</p>";
     }
 
+    public function save() {
+        if(self ::getVoitureByImma($this -> imma) === false) {
+            $query = Model ::getPdo() -> prepare("INSERT INTO voiture VALUE (:imma, :brand, :color)");
+            $values = ["imma" => $this -> imma, "brand" => $this -> brand, "color" => $this -> color];
+
+            $query -> execute($values);
+        }
+    }
+
     public function display(): void {
         echo $this;
     }
 
-    public static function getVoitureByImma($imma) {
-        $query = Model::getPdo() -> prepare("SELECT * FROM voiture WHERE immatriculation=:tag");
+    public static function getVoitureByImma($imma): bool|Voiture {
+        $query = Model ::getPdo() -> prepare("SELECT * FROM voiture WHERE immatriculation=:tag");
         $values = ["tag" => $imma];
 
         $query -> execute($values);
         $array = $query -> fetchAll(PDO::FETCH_OBJ);
 
         if(!empty($array)) {
-            return $array[0];
+            return new Voiture($array[0] -> immatriculation, $array[0] -> marque, $array[0] -> couleur);
         }
         return false;
     }
 
     public static function getAllVoitures(): array {
-        $pdo = Model::getPdo();
+        $pdo = Model ::getPdo();
         $query = $pdo -> query("SELECT * FROM voiture");
         $cars = [];
 

@@ -24,7 +24,10 @@ foreach(Trajet::getAllTrajets() as $key => $value) {
     $value -> display();
 }*/
 
-$key = Voiture::getVoitureByImma("AA000AA");
+echo Voiture::getVoitureByImma("AA000AA");
+
+$v = new Voiture('AA999AA', 'Skoda', 'Vert');
+$v -> save();
 
 ?>
 </body>
