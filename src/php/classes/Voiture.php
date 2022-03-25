@@ -19,8 +19,8 @@ class Voiture {
     }
 
     public function save() {
-        if(self ::getVoitureByImma($this -> imma) === false) {
-            $query = Model ::getPdo() -> prepare("INSERT INTO voiture VALUE (:imma, :brand, :color)");
+        if(self::getVoitureByImma($this -> imma) === false) {
+            $query = Model::getPdo() -> prepare("INSERT INTO voiture VALUE (:imma, :brand, :color)");
             $values = ["imma" => $this -> imma, "brand" => $this -> brand, "color" => $this -> color];
 
             $query -> execute($values);
@@ -32,7 +32,7 @@ class Voiture {
     }
 
     public static function getVoitureByImma($imma): bool|Voiture {
-        $query = Model ::getPdo() -> prepare("SELECT * FROM voiture WHERE immatriculation=:tag");
+        $query = Model::getPdo() -> prepare("SELECT * FROM voiture WHERE immatriculation=:tag");
         $values = ["tag" => $imma];
 
         $query -> execute($values);
@@ -45,7 +45,7 @@ class Voiture {
     }
 
     public static function getAllVoitures(): array {
-        $pdo = Model ::getPdo();
+        $pdo = Model::getPdo();
         $query = $pdo -> query("SELECT * FROM voiture");
         $cars = [];
 

@@ -4,6 +4,32 @@ p {
     margin-block-end: 2px;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+}
+
 .tab {
     text-indent: 24px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.ibox {
+    background-color: #a4a4a4;
+    display: flex;
+    flex-direction: column;
+    border: black 1px solid;
+    padding: 8px;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    border: black 1px solid;
+    padding: 8px;
+    width: 128px;
 }

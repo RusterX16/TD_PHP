@@ -8,26 +8,20 @@
 <body>
 <?php
 require_once("classes/Model.php");
+require_once("classes/Conf.php");
 require_once("classes/Voiture.php");
 require_once("classes/Utilisateur.php");
 require_once("classes/Trajet.php");
 
-/*foreach(Voiture::getAllVoitures() as $key => $value) {
-    $value -> display();
+Conf::show_tables();
+echo "<br>";
+
+foreach(Voiture::getAllVoitures() as $v) {
+    $v -> display();
 }
+echo "<br>";
 
-foreach(Utilisateur::getAllUtilisateurs() as $key => $value) {
-    $value -> display();
-}
-
-foreach(Trajet::getAllTrajets() as $key => $value) {
-    $value -> display();
-}*/
-
-echo Voiture::getVoitureByImma("AA000AA");
-
-$v = new Voiture('AA999AA', 'Skoda', 'Vert');
-$v -> save();
+include("form.php");
 
 ?>
 </body>
